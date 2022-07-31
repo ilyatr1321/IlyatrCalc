@@ -1,0 +1,99 @@
+import java.util.Scanner;
+
+
+    public class Main {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println(calc(sc.nextLine()));
+        }
+    public static String calc(String input) {
+        String[] arr = input.split(" ");
+        int c = 0;
+        if (arr.length == 3) {
+            if (arr[0].matches("\\d+") && arr[2].matches("\\d+")) {
+                if ("12345678910".contains(arr[0]) && "12345678910".contains(arr[2])) {
+                    int a = Integer.parseInt(arr[0]);
+                    int b = Integer.parseInt(arr[2]);
+                    switch (arr[1]) {
+                        case "+":
+                            c = (a + b);
+                            break;
+                        case "-":
+                            c = (a - b);
+                            break;
+                        case "*":
+                            c = (a * b);
+                            break;
+                        case "/":
+                            c = (a / b);
+                            break;
+                    }
+                    return String.valueOf(c);
+                } else {
+                    throw new NumberFormatException("Некорректный ввод");
+                }
+            }
+        }
+        if (arr.length < 3) {
+            throw new NumberFormatException("Строка не является математической операцией");
+        }
+        if (arr.length > 3) {
+            throw new NumberFormatException("Формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+        }
+
+        String[] symb = {"0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+                "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
+                "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
+                "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
+                "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
+                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
+                "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
+        if ("IIIVIIIIX".contains(arr[0]) && "IIIVIIIIX".contains(arr[2])) {
+            int element0 = Conv(symb, arr[0]);
+            int element1 = Conv(symb, arr[2]);
+
+            switch (arr[1]) {
+                case "+": {
+                    c = element0 + element1;
+
+                }
+                break;
+                case "-": {
+                    c = element0 - element1;
+                    if (c > 0) {
+                    } else {
+                        throw new NumberFormatException("В римской системе нет отрицательных чисел");
+                    }
+                }
+                break;
+                case "*": {
+                    c = element0 * element1;
+
+                }
+                break;
+                case "/": {
+                    c = element0 / element1;
+
+                }
+            }
+            return symb[c];
+        }
+        else {
+            throw new NumberFormatException("Некорректный ввод");
+        }
+
+    }
+
+
+
+        static int Conv(String[] array, String el) {
+            for (int i = 0; i < array.length; i++) {
+                if (array[i].equals(el)) {
+                    return i;
+
+                }
+            }
+            return 0;
+
+        }
+    }
